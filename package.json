@@ -1,0 +1,32 @@
+{
+  "name": "ufsg-item-scraper",
+  "version": "2.0.1",
+  "description": "UFSG Item Scraper - guide.fallensword.com",
+  "engines": {
+    "node": "16.x"
+  },
+  "main": "scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atompkins/ufsg-item-scraper.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/atompkins/ufsg-item-scraper/issues"
+  },
+  "homepage": "https://github.com/atompkins/ufsg-item-scraper#readme",
+  "devDependencies": {
+    "eslint": "^8.41.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cheerio": "^1.0.0-rc.10",
+    "sqlite3": "^5.1.6"
+  }
+}
