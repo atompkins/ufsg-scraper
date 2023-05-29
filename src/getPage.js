@@ -4,10 +4,12 @@ const stdout = require('./stdout');
 function logError(url, error) {
   if (error.response) {
     stdout('error.response.status', error.response.status, url);
-  } else if (error.request) {
-    stdout('error.request', error.request);
-  } else {
+  // } else if (error.request) {
+  //   stdout('error.request', error.request);
+  } else if (error.message) {
     stdout('error.message', error.message);
+  } else {
+    stdout('error', error);
   }
 }
 
@@ -39,7 +41,7 @@ async function getPage(target, attempt = 1) {
     result = await axios.get(url);
   } catch (error) {
     logError(url, error);
-    if (error.response.status === 500) return result;
+    if (error.response?.status === 500) return result;
     if (attempt <= 10) {
       await delay(attempt * 100);
       return getPage(target, attempt + 1);
