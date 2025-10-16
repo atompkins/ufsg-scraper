@@ -28,7 +28,6 @@ async function refillTokens() {
 }
 
 async function limiter() {
-  // eslint-disable-next-line no-await-in-loop
   while (tokens < 1) await refillTokens();
   tokens -= 1;
 }

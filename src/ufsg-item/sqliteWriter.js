@@ -45,6 +45,7 @@ function createTable() {
     , ProtectGold      integer null
     , Protection       integer null
     , ReinforcedArmor  integer null
+    , Soulless         integer null
     , Sustain          integer null
     , TemporalShift    integer null
     , Thievery         integer null
@@ -138,6 +139,7 @@ function prepareStmt() {
     , ProtectGold
     , Protection
     , ReinforcedArmor
+    , Soulless
     , Sustain
     , TemporalShift
     , Thievery
@@ -228,6 +230,7 @@ function prepareStmt() {
     , $ProtectGold
     , $Protection
     , $ReinforcedArmor
+    , $Soulless
     , $Sustain
     , $TemporalShift
     , $Thievery
