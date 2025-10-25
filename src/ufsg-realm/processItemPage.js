@@ -1,5 +1,4 @@
 const cheerio = require('cheerio');
-const { sqlWriter } = require('./sqliteWriter');
 
 const getHeading = ($) => /(.+) \(Min Level: (\d+)\)/.exec(
   $('td[width="800"]').find('b').text(),
@@ -24,12 +23,12 @@ const getCreatureInfo = ($) => getTheCreatures($).map((el) => [
   /\((.*)\)/.exec(getCreatureClass($(el)))[1],
 ]);
 
-function processItemPage({ config, data }) {
+function processItemPage(stmt, { config, data }) {
   const realmId = /realm_id=(\d+)/.exec(config.url)[1];
   const $ = cheerio.load(data);
   const [, realmName, level] = getHeading($);
   getCreatureInfo($).forEach((aCreature) => {
-    sqlWriter([realmId, realmName, level, ...aCreature]);
+    stmt.run([realmId, realmName, level, ...aCreature]);
   });
 }
 

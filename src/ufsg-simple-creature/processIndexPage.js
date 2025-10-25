@@ -1,9 +1,8 @@
 const cheerio = require('cheerio');
-const { sqlWriter } = require('./sqliteWriter');
 
-function doRows($, aRow) {
+function doRows(stmt, $, aRow) {
   const itemAnchor = $('a', aRow);
-  sqlWriter([
+  stmt.run([
     /creature_id=(\d+)&/.exec(itemAnchor.attr('href'))[1],
     itemAnchor.text(),
     $(':nth-child(2)', aRow).text(),
@@ -16,7 +15,7 @@ function doRows($, aRow) {
   ]);
 }
 
-async function processIndexPage({ data }) {
+async function processIndexPage(stmt, { data }) {
   const $ = cheerio.load(data);
   const mainTable = $('table[width="800"]');
   const thisPageFont = $('tr:first-child font[color="#FF0000"]', mainTable);
@@ -25,7 +24,7 @@ async function processIndexPage({ data }) {
   const nextPageLabel = nextPageAnchor.text();
   const itemRows = $('tr:nth-child(2n+3):not(:last-child)', mainTable)
     .get();
-  itemRows.forEach((aRow) => doRows($, aRow));
+  itemRows.forEach((aRow) => doRows(stmt, $, aRow));
   return { nextPageLabel, nextPageUrl };
 }
 
